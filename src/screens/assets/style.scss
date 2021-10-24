@@ -1,12 +1,3 @@
-.nav-box{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    width: 100%;
-    box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),3px 3px 5px rgba(0, 0, 0, 0.1);
-}
-
 * 
 {
   margin: 0;
@@ -20,6 +11,16 @@ body {
   align-items: center;
   min-height:100vh;
   background: #ebf5fc;
+  font-family: $font-main !important;
+}
+
+.nav-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -98,5 +99,60 @@ ul {
 .label-feature{
     line-height: 50px;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.modal-layout{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    margin: auto;
+    display: flex;
+  .modal-content{
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 800px;
+      height: 560px;
+      padding: 20px;
+      .group-button{
+        width: 300px;
+        margin: 15px auto;
+        display: flex;
+        justify-content: space-between;
+        button{
+          width: 120px;
+        }
+      }
+      .row{
+        padding: 10px 0;
+      }
+  }
+}
+
+.modal-notification{
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  .modal-content{
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 400px;
+      height: 300px;
+      .box-modal-action{
+          .btn {
+              color: #fff;
+              width:120px;
+              margin: 20px;
+            }
+      }
+  }
 }

@@ -6,7 +6,7 @@ import lockdown from "../assets/img/lockdown.png"
 import market from "../assets/img/market.png"
 import supermarket from "../assets/img/supermarket.png"
 
-export default function FormComponent() {
+export default function FormLayerComponent() {
     return (
         <>
             <ul>
@@ -16,8 +16,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={covid} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={covid} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Ổ dịch</label>
                     </label>
@@ -25,8 +25,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={lockdown} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={lockdown} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Vùng phong tỏa</label>
                     </label>
@@ -37,8 +37,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={vaccine} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={vaccine} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Điểm tiêm chủng</label>
                     </label>
@@ -46,8 +46,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={hospital} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={hospital} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Điểm xét nghiệm</label>
                     </label>
@@ -58,8 +58,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={market} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={market} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Chợ</label>
                     </label>
@@ -67,8 +67,8 @@ export default function FormComponent() {
                 <li>
                     <label className="d-flex">
                         <input type="checkbox" name="" />
-                        <div class="icon-box image-container">
-                            <img crossOrigin="anonymous" class="image-content" src={supermarket} alt="" />
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={supermarket} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Siêu thị</label>
                     </label>

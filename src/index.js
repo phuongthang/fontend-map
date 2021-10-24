@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+    google: {
+        families: ['Poppins:wght@400;500;700;800&display=swap', 'sans-serif']
+    }
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <App />,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

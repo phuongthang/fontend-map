@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
-import FormComponent from '../Form/Form';
+import FormCURDComponent from '../Form/FormCURD';
+import FormLayerComponent from '../Form/FormLayer';
 
 export default function OffCanvasComponent() {
     const [showCanvas, setShowCanvas] = useState(true);
@@ -21,7 +22,9 @@ export default function OffCanvasComponent() {
                     <Offcanvas.Title>LỚP DỮ LIỆU TRÊN BẢN ĐỒ</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <FormComponent/>
+                    <FormCURDComponent/>
+                    <hr/>
+                    <FormLayerComponent/>
                 </Offcanvas.Body>
             </Offcanvas>
         </>
