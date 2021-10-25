@@ -141,6 +141,56 @@ ul {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  max-width: 1000px !important;
+  .modal-content{
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 550px;
+      height: 300px;
+      .box-modal-action{
+          .btn {
+              color: #fff;
+              width:120px;
+              margin: 20px;
+            }
+      }
+  }
+}
+
+.modal-infomation{
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  max-width: 1000px !important;
+  .modal-content{
+      padding: 20px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 550px;
+      height: 400px;
+      .box-modal-action{
+          .btn {
+              color: #fff;
+              width:120px;
+              margin: 20px;
+            }
+      }
+      img{
+        width: 200px;
+        height: 100px;
+        object-fit: cover;
+      }
+  }
+}
+
+.modal-submit{
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
   .modal-content{
       margin: auto;
       display: flex;

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Constants from '../../constants/constants';
 import addressApi from '../api/addressApi';
 import ModalNotification from './ModalNotification';
+import ModalSubmit from './ModalSubmit';
 
 export default function ModalCreateComponent(props) {
-    const { toggle, modal } = props;
+    const { toggle } = props;
     const [viewProvince, setViewProvince] = useState();
     const [viewDistrict, setViewDistrict] = useState();
     const [viewWard, setViewWard] = useState();
@@ -13,9 +14,18 @@ export default function ModalCreateComponent(props) {
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
     const [modalNotification, setModalNotification] = useState(false);
+    const [modalSubmit, setModalSubmit] = useState(false);
+    const [disableBtn, setDisableBtn] = useState(true);
+    const [hasFile, setHasFile] = useState(false);
+
     const toggleModalNotification = () => {
         setModalNotification(!modalNotification);
     }
+
+    const toggleModalSubmit = () => {
+        setModalSubmit(!modalSubmit);
+    }
+
     const [identification, setIdentification] = useState({
         province: '',
         district: '',
@@ -27,10 +37,29 @@ export default function ModalCreateComponent(props) {
         district: 0,
         ward: 0,
         street: 0,
+        type: 1,
+        img: '',
+        note: ''
     });
 
+    const _onChangeFile = (e) => {
+        setInfomationObject((prevState) => ({
+            ...prevState,
+            img: e.target.files[0],
+        }));
+        setHasFile(true);
+    }
 
     const _onChange = (e) => {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+        setInfomationObject((prevState) => ({
+            ...prevState,
+            [fieldName]: fieldValue,
+        }));
+    }
+
+    const _onChangeSelectBox = (e) => {
         const fieldName = e.target.name;
         const fieldValueArray = e.target.value.split('!');
         const fieldValue = fieldValueArray[0];
@@ -56,6 +85,7 @@ export default function ModalCreateComponent(props) {
             if (response.status === Constants.HTTP_STATUS.OK) {
                 setLongitude(response.data.features[0].center[0]);
                 setLatitude(response.data.features[0].center[1]);
+                setDisableBtn(false);
                 toggleModalNotification();
             }
         }, (error) => {
@@ -125,35 +155,35 @@ export default function ModalCreateComponent(props) {
                     </div>
                     <div className="form-check-feature d-flex justify-content-center">
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" defaultChecked type="radio" name="type" id="covid" value="1" />
-                            <label className="form-check-label" for="covid">Ổ dịch</label>
+                            <input className="form-check-input" defaultChecked type="radio" name="type" id="covid" value="1" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="covid">Ổ dịch</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="lockdown" value="2" />
-                            <label className="form-check-label" for="lockdown">Vùng phong tỏa</label>
+                            <input className="form-check-input" type="radio" name="type" id="lockdown" value="2" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="lockdown">Vùng phong tỏa</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="vaccine" value="3" />
-                            <label className="form-check-label" for="vaccine">Điểm tiêm chủng</label>
+                            <input className="form-check-input" type="radio" name="type" id="vaccine" value="3" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="vaccine">Điểm tiêm chủng</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="hospital" value="4" />
-                            <label className="form-check-label" for="hospital">Điểm xét nghiệm</label>
+                            <input className="form-check-input" type="radio" name="type" id="hospital" value="4" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="hospital">Điểm xét nghiệm</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="supermarket" value="5" />
-                            <label className="form-check-label" for="supermarket">Siêu thị</label>
+                            <input className="form-check-input" type="radio" name="type" id="supermarket" value="5" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="supermarket">Siêu thị</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="market" value="6" />
-                            <label className="form-check-label" for="market">Chợ</label>
+                            <input className="form-check-input" type="radio" name="type" id="market" value="6" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="market">Chợ</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <small for="province">Thành phố:</small>
-                                <select className="form-control" name="province" id="province" onChange={_onChange}>
+                                <small htmlFor="province">Thành phố:</small>
+                                <select className="form-control" name="province" id="province" onChange={_onChangeSelectBox}>
                                     <option defaultValue>Chọn Thành phố</option>
                                     {viewProvince}
                                 </select>
@@ -161,8 +191,8 @@ export default function ModalCreateComponent(props) {
                         </div>
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <small for="province">Quận/Huyện:</small>
-                                <select className="form-control" name="district" id="district" onChange={_onChange}>
+                                <small htmlFor="province">Quận/Huyện:</small>
+                                <select className="form-control" name="district" id="district" onChange={_onChangeSelectBox}>
                                     <option defaultValue>Chọn Quận/Huyện</option>
                                     {viewDistrict}
                                 </select>
@@ -172,8 +202,8 @@ export default function ModalCreateComponent(props) {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <small for="province">Thị trấn/Xã:</small>
-                                <select className="form-control" name="ward" id="ward" onChange={_onChange}>
+                                <small htmlFor="province">Thị trấn/Xã:</small>
+                                <select className="form-control" name="ward" id="ward" onChange={_onChangeSelectBox}>
                                     <option defaultValue>Chọn Thị trấn/Xã</option>
                                     {viewWard}
                                 </select>
@@ -181,8 +211,8 @@ export default function ModalCreateComponent(props) {
                         </div>
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <small for="province">Đường:</small>
-                                <select className="form-control" name="street" id="street" onChange={_onChange}>
+                                <small htmlFor="province">Đường:</small>
+                                <select className="form-control" name="street" id="street" onChange={_onChangeSelectBox}>
                                     <option defaultValue>Chọn Đường</option>
                                     {viewStreet}
                                 </select>
@@ -195,21 +225,21 @@ export default function ModalCreateComponent(props) {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <label for="province">Ảnh:</label>
-                                <input type="file" className="form-control" />
+                                <label htmlFor="img">Ảnh:</label>
+                                <input type="file" name="img" className="form-control" onChange={_onChangeFile} />
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <label for="province">Ghi chú:</label>
-                                <input type="textarea" row="4" className="form-control" />
+                                <label htmlFor="note">Ghi chú:</label>
+                                <input type="textarea" name="note" row="4" className="form-control" onChange={_onChange} />
                             </div>
                         </div>
                     </div>
                     <div className="group-button d-flex text-center">
-                        <button className="btn btn-sm btn-primary" type="submit">Đăng kí</button>
+                        <button disabled={disableBtn} onClick={toggleModalSubmit} className="btn btn-sm btn-primary" type="button">Đăng kí</button>
                         <button className="btn btn-sm btn-danger" type="button" onClick={toggle}>Hủy</button>
                     </div>
                 </form>
@@ -221,6 +251,15 @@ export default function ModalCreateComponent(props) {
             longitude = {longitude}
             latitude = {latitude}
             address = {address}/> }
+        {modalSubmit && <ModalSubmit
+            modal = {modalSubmit} 
+            toggle = {toggleModalSubmit}
+            data = {infomationObject}
+            hasFile = {hasFile}
+            address = {address}
+            longitude = {longitude}
+            latitude = {latitude}
+            /> }
         </>
     )
 }
