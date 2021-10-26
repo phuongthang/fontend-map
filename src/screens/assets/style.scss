@@ -42,12 +42,12 @@ ul {
       position: relative; 
       cursor: pointer;
       
-      & input[type="checkbox"] {
+      & span {
         position: absolute;
         opacity: 0;
       }
       
-      & :checked ~ .icon-box {
+      & .active ~ .icon-box {
         box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1),
               inset 3px 3px 5px rgba(0, 0, 0, 0.1);
         

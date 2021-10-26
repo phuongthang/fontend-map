@@ -5,7 +5,8 @@ import FormLayerComponent from '../Form/FormLayer';
 import menu from "../assets/img/menu.png"
 
 
-export default function OffCanvasComponent() {
+export default function OffCanvasComponent(props) {
+    const {showMarker, setShowMarker } = props;
     const [showCanvas, setShowCanvas] = useState(true);
 
     const _onClose = () => setShowCanvas(false);
@@ -24,9 +25,9 @@ export default function OffCanvasComponent() {
                     <Offcanvas.Title>LỚP DỮ LIỆU TRÊN BẢN ĐỒ</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <FormCURDComponent/>
+                    <FormCURDComponent setShowMarker = {setShowMarker} showMarker={showMarker}/>
                     <hr/>
-                    <FormLayerComponent/>
+                    <FormLayerComponent setShowMarker = {setShowMarker} showMarker={showMarker}/>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

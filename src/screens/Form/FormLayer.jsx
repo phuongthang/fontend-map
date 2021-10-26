@@ -6,25 +6,34 @@ import lockdown from "../assets/img/lockdown.png"
 import market from "../assets/img/market.png"
 import supermarket from "../assets/img/supermarket.png"
 
-export default function FormLayerComponent() {
+export default function FormLayerComponent(props) {
+
+    const { showMarker, setShowMarker } = props;
+
+    const _onClickChangeState = (name, value) => {
+        setShowMarker((prevState) => ({
+            ...prevState,
+            [name]: !value,
+        }));
+    }
     return (
         <>
             <ul>
                 <div className="box-title">
                     <h5>Thông tin dịch bệnh</h5>
                 </div>
-                <li>
+                <li onClick={() => _onClickChangeState("covid", showMarker.covid)}>
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.covid ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={covid} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Ổ dịch</label>
                     </label>
                 </li>
-                <li>
+                <li onClick={() => _onClickChangeState("lockdown", showMarker.lockdown)}>
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.lockdown ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={lockdown} alt="" />
                         </div>
@@ -34,18 +43,18 @@ export default function FormLayerComponent() {
                 <div className="box-title">
                     <h5>Cơ sở y tế</h5>
                 </div>
-                <li>
+                <li onClick={() => _onClickChangeState("vaccine", showMarker.vaccine)}>
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.vaccine ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={vaccine} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Điểm tiêm chủng</label>
                     </label>
                 </li>
-                <li>
+                <li onClick={() => _onClickChangeState("hospital", showMarker.hospital)}>
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.hospital ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={hospital} alt="" />
                         </div>
@@ -55,18 +64,18 @@ export default function FormLayerComponent() {
                 <div className="box-title">
                     <h5>Dịch vụ thiết yếu</h5>
                 </div>
-                <li>
+                <li onClick={() => _onClickChangeState("market", showMarker.market)} >
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.market ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={market} alt="" />
                         </div>
                         <label htmlFor="" className="mx-3 label-feature">Chợ</label>
                     </label>
                 </li>
-                <li>
+                <li onClick={() => _onClickChangeState("supermarket", showMarker.supermarket)} >
                     <label className="d-flex">
-                        <input type="checkbox" name="" />
+                        <span className={`${showMarker.supermarket ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={supermarket} alt="" />
                         </div>

@@ -1,14 +1,23 @@
 import React, {useState} from 'react';
 import create from "../assets/img/create.png";
 import update from "../assets/img/update.png";
-import trash from "../assets/img/trash.png";
+import view from "../assets/img/view.png";
+import unview from "../assets/img/unview.png";
 import list from "../assets/img/list.png";
 import ModalCreateComponent from "../Modal/ModalCreate";
 
-export default function FormCURDComponent() {
+export default function FormCURDComponent(props) {
+    const { showMarker, setShowMarker } = props;
     const [modalCreate, setModalCreate] = useState(false);
     const toggleModalCreate = () => {
         setModalCreate(!modalCreate);
+    }
+
+    const _onClickChangeState = (name, value) => {
+        setShowMarker((prevState) => ({
+            ...prevState,
+            [name]: !value,
+        }));
     }
     return (
         <>
@@ -37,10 +46,10 @@ export default function FormCURDComponent() {
                         </div>
                     </label>
                 </li>
-                <li>
+                <li onClick={() => _onClickChangeState("all", showMarker.all)}>
                     <label>
                         <div className="icon-box image-container">
-                            <img crossOrigin="anonymous" className="image-content" src={trash} alt="" />
+                            <img crossOrigin="anonymous" className="image-content" src={showMarker.all ? view : unview} alt="" />
                         </div>
                     </label>
                 </li>
