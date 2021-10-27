@@ -11,11 +11,19 @@ const common = {
     TYPE:{
         COVID: 1,
         LOCKDOWN: 2,
-        HOSPITAL: 3,
-        VACCINE: 4,
+        VACCINE: 3,
+        HOSPITAL: 4,
         MARKET:5,
         SUPERMARKET:6,
 
+    },
+    MAPPING_TYPE: {
+        1 : 'covids',
+        2: 'lockdowns',
+        3: 'vaccines',
+        4: 'hospitals',
+        5: 'markets',
+        6: 'supermarkets'
     },
     URL_IMG: 'http://127.0.0.1:8000'
 }

@@ -5,12 +5,18 @@ import view from "../assets/img/view.png";
 import unview from "../assets/img/unview.png";
 import list from "../assets/img/list.png";
 import ModalCreateComponent from "../Modal/ModalCreate";
+import ModalListComponent from "../Modal/ModalList";
 
 export default function FormCURDComponent(props) {
     const { showMarker, setShowMarker } = props;
     const [modalCreate, setModalCreate] = useState(false);
     const toggleModalCreate = () => {
         setModalCreate(!modalCreate);
+    }
+
+    const [modalList, setModalList] = useState(false);
+    const toggleModalList = () => {
+        setModalList(!modalList);
     }
 
     const _onClickChangeState = (name, value) => {
@@ -26,7 +32,7 @@ export default function FormCURDComponent(props) {
                     <h5>Cập nhật thông tin</h5>
                 </div>
                 <li>
-                    <label>
+                    <label onClick={toggleModalList}>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={list} alt="" />
                         </div>
@@ -40,7 +46,7 @@ export default function FormCURDComponent(props) {
                     </label>
                 </li>
                 <li>
-                    <label>
+                    <label onClick={()=>window.location.reload()}>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={update} alt="" />
                         </div>
@@ -56,6 +62,9 @@ export default function FormCURDComponent(props) {
             </ul>
             {
                 modalCreate && <ModalCreateComponent modal={modalCreate} toggle = {toggleModalCreate}/>
+            }
+            {
+                modalList && <ModalListComponent modal={modalList} toggle = {toggleModalList}/>
             }
         </>
     )
