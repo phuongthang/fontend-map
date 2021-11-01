@@ -11,12 +11,13 @@ function ModalChangeStatus(props) {
         if(data.delete_flag){
             flag = 0;
         }
-        coordinatesApi.changeStatusCoordinates(
-            {
-                id: data.id, 
-                type: parseInt(type,10), 
-                status: flag
-            }).then((response) => {
+
+        let params = {
+            id: data.id, 
+            type: parseInt(type,10), 
+            status: flag
+        }
+        coordinatesApi.changeStatusCoordinates(params).then((response) => {
             let mounted = true;
             if (mounted) {
                 if (response.status === Constants.HTTP_STATUS.OK) {

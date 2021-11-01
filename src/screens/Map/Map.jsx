@@ -59,6 +59,9 @@ export default function MapScreen() {
         setModalInfomation(!modalInfomation);
     }
 
+    /**
+     * open modal detail coordinates
+     */
     const _onClickModal = (data) => {
         setModalData(data);
         toggleModalInfomation();

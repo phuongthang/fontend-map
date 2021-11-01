@@ -4,8 +4,10 @@ import update from "../assets/img/update.png";
 import view from "../assets/img/view.png";
 import unview from "../assets/img/unview.png";
 import list from "../assets/img/list.png";
+import road from "../assets/img/road.png";
 import ModalCreateComponent from "../Modal/ModalCreate";
 import ModalListComponent from "../Modal/ModalList";
+import ModalCaculatorRoadComponent from '../Modal/ModalCaculatorRoad';
 
 export default function FormCURDComponent(props) {
     const { showMarker, setShowMarker } = props;
@@ -17,6 +19,11 @@ export default function FormCURDComponent(props) {
     const [modalList, setModalList] = useState(false);
     const toggleModalList = () => {
         setModalList(!modalList);
+    }
+
+    const [modalCaculator, setModalCaculator] = useState(false);
+    const toggleModalCaculator = () => {
+        setModalCaculator(!modalCaculator);
     }
 
     const _onClickChangeState = (name, value) => {
@@ -46,16 +53,16 @@ export default function FormCURDComponent(props) {
                     </label>
                 </li>
                 <li>
-                    <label onClick={()=>window.location.reload()}>
+                    <label onClick={() => _onClickChangeState("all", showMarker.all)}>
                         <div className="icon-box image-container">
-                            <img crossOrigin="anonymous" className="image-content" src={update} alt="" />
+                            <img crossOrigin="anonymous" className="image-content" src={showMarker.all ? view : unview} alt="" />
                         </div>
                     </label>
                 </li>
-                <li onClick={() => _onClickChangeState("all", showMarker.all)}>
-                    <label>
+                <li>
+                    <label onClick={toggleModalCaculator}>
                         <div className="icon-box image-container">
-                            <img crossOrigin="anonymous" className="image-content" src={showMarker.all ? view : unview} alt="" />
+                            <img crossOrigin="anonymous" className="image-content" src={road} alt="" />
                         </div>
                     </label>
                 </li>
@@ -65,6 +72,9 @@ export default function FormCURDComponent(props) {
             }
             {
                 modalList && <ModalListComponent modal={modalList} toggle = {toggleModalList}/>
+            }
+            {
+                modalCaculator && <ModalCaculatorRoadComponent modal = {modalCaculator} toggle = {toggleModalCaculator}/>
             }
         </>
     )

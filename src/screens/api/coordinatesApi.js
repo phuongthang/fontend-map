@@ -17,7 +17,7 @@ const coordinatesApi = {
 
     changeStatusCoordinates(params) {
         const url = `/coordinates/change`;
-        return axiosClient.post(params, url);
+        return axiosClient.post(url, params);
     },
 };
 
