@@ -1,19 +1,36 @@
 import React , {useState} from "react";
+
+//icon
 import view from "../assets/img/view.png";
 import unview from "../assets/img/unview.png";
+
+//Component
 import ModalChangeStatus from "../Modal/ModalChangeStatus";
 
 function TableData(props) {
 
+    /**
+     * get property
+     */
     const { data, type } = props;
 
+    /**
+     * defined state
+     */
     const [dataItem, setDataItem] = useState();
-
     const [modalChangeStatus, setModalChangeStatus] = useState(false);
+
+    /**
+     * event open modal change status
+     */
     const toggleModalChangeStatus = (item) => {
         setDataItem(item);
         setModalChangeStatus(!modalChangeStatus);
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <table className="table table-striped">

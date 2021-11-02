@@ -1,14 +1,30 @@
 import React, {useState} from "react";
-import { Button, Modal } from "reactstrap";
-import Common from './../../constants/common';
+
+//Packet
+import { Modal } from "reactstrap";
+
+//Api
 import addressApi from "../api/addressApi";
+
+//Constant
 import Constants from "../../constants/constants";
 
 function ModalGetDistanceComponent(props) {
+    
+    /**
+     * get property
+     */
     const { modal, toggle, pointA, pointB } = props;
+
+    /**
+     * defined state
+     */
     const [method, setMethod] = useState();
     const [distance, setDistance] = useState();
 
+    /**
+     * call api get distance
+     */
     const callApiGetDistance = (method) => {
         addressApi.getDistanceApi(pointA, pointB, method).then((response) => {
             if (response.status === Constants.HTTP_STATUS.OK) {
@@ -19,6 +35,10 @@ function ModalGetDistanceComponent(props) {
             //
         });
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <Modal

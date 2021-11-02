@@ -1,20 +1,42 @@
 import React, { useState } from 'react';
+
+//Component
 import { Offcanvas } from 'react-bootstrap';
 import FormCURDComponent from '../Form/FormCURD';
 import FormLayerComponent from '../Form/FormLayer';
+
+//icon
 import menu from "../assets/img/menu.png"
 
 
 export default function OffCanvasComponent(props) {
+    /**
+     * get property
+     */
     const {showMarker, setShowMarker } = props;
+
+    /**
+     * defined state
+     */
     const [showCanvas, setShowCanvas] = useState(true);
 
+    /**
+     * envent control open canvas
+     */
     const _onClose = () => setShowCanvas(false);
     const _onToggle = () => setShowCanvas((status) => !status);
+
+    /**
+     * option canvas
+     */
     const options = {
         scroll: false,
         backdrop: false,
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <div style={{cursor:'pointer'}} className="image-container px-5" onClick={_onToggle}>

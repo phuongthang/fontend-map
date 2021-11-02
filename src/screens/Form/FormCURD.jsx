@@ -1,37 +1,63 @@
 import React, {useState} from 'react';
+//icon
 import create from "../assets/img/create.png";
-import update from "../assets/img/update.png";
 import view from "../assets/img/view.png";
 import unview from "../assets/img/unview.png";
 import list from "../assets/img/list.png";
 import road from "../assets/img/road.png";
+
+//Component
 import ModalCreateComponent from "../Modal/ModalCreate";
 import ModalListComponent from "../Modal/ModalList";
 import ModalCaculatorRoadComponent from '../Modal/ModalCaculatorRoad';
 
 export default function FormCURDComponent(props) {
+    /**
+     * get property
+     */
     const { showMarker, setShowMarker } = props;
+
+    /**
+     * get defined state
+     */
     const [modalCreate, setModalCreate] = useState(false);
+    const [modalList, setModalList] = useState(false);
+    const [modalCaculator, setModalCaculator] = useState(false);
+
+    /**
+     * event control open modal create
+     */
     const toggleModalCreate = () => {
         setModalCreate(!modalCreate);
     }
 
-    const [modalList, setModalList] = useState(false);
+    /**
+     * event control open modal list
+     */
     const toggleModalList = () => {
         setModalList(!modalList);
     }
 
-    const [modalCaculator, setModalCaculator] = useState(false);
+    /**
+     * event control open modal caculator distance
+     */
     const toggleModalCaculator = () => {
         setModalCaculator(!modalCaculator);
     }
 
+    /**
+     * event change state marker
+     */
     const _onClickChangeState = (name, value) => {
         setShowMarker((prevState) => ({
             ...prevState,
             [name]: !value,
         }));
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <ul className="d-flex">

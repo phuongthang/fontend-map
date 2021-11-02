@@ -1,8 +1,17 @@
 import React from "react";
+
+//Packet
 import { Button, Modal } from "reactstrap";
 
 function ModalNotification(props){
+    /**
+     * get property
+     */
     const {modal, toggle, address, longitude, latitude } = props;
+
+    /**
+     * render template
+     */
     return(
         <>
             <Modal 

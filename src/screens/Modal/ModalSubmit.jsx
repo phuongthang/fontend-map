@@ -1,11 +1,23 @@
 import React from "react";
+
+//Packet
 import { Button, Modal } from "reactstrap";
+
+//Constants
 import Constants from "../../constants/constants";
+
+//Api
 import coordinatesApi from "../api/coordinatesApi";
 
 function ModalSubmit(props) {
+    /**
+     * get property
+     */
     const { modal, toggle, data, hasFile, address, longitude, latitude } = props;
 
+    /**
+     * register coordinates
+     */
     const registerCoordinates = () => {
         const form = new FormData();
         form.append("type", parseInt(data.type,10));
@@ -29,6 +41,10 @@ function ModalSubmit(props) {
             return () => mounted = false;
         });
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <Modal

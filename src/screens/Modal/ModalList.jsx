@@ -1,16 +1,33 @@
 import React, {useState, useEffect} from "react";
+//Packet
 import { Button, Modal } from "reactstrap";
+
+//Api
 import coordinatesApi from "../api/coordinatesApi";
+
+//Component
 import TableData from "../Tab/TableData";
+
+//Constants
 import Common from './../../constants/common';
 import Constants from './../../constants/constants';
 
 function ModalListComponent(props) {
+    /**
+     * get property
+     */
     const { modal, toggle } = props;
+
+    /**
+     * defined state
+     */
     const [typeTab, setTypeTab] = useState(Common.TYPE.COVID);
     const [allData, setAllData] = useState();
     const [data, setData] = useState();
 
+    /**
+     * open select tab
+     */
     const _onClickSetTypeTab = (typeTab) => {
         setData(allData[Common.MAPPING_TYPE[typeTab]]);
         setTypeTab(typeTab);
@@ -39,6 +56,9 @@ function ModalListComponent(props) {
         getListCoordinates();
     }, [])
 
+    /**
+     * render template
+     */
     return (
         <>
             <Modal

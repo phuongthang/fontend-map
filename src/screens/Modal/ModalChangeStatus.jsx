@@ -1,11 +1,24 @@
 import React from "react";
+
+//Packet
 import { Button, Modal } from "reactstrap";
+
+//Constant
 import Constants from "../../constants/constants";
+
+//Api
 import coordinatesApi from "../api/coordinatesApi";
 
 function ModalChangeStatus(props) {
+
+    /**
+     * get property
+     */
     const { modal, toggle, data, type} = props;
 
+    /**
+     * call API change status coordinates
+     */
     const apiChangeStatusCoordinates = () => {
         let flag = 1;
         if(data.delete_flag){
@@ -30,6 +43,10 @@ function ModalChangeStatus(props) {
             return () => mounted = false;
         });
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <Modal

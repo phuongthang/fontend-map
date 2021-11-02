@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
+
+//Constant
 import Constants from '../../constants/constants';
+
+//API
 import addressApi from '../api/addressApi';
+
+//Component
 import ModalNotification from './ModalNotification';
 import ModalSubmit from './ModalSubmit';
 
 export default function ModalCreateComponent(props) {
+    /**
+     * get property
+     */
     const { toggle } = props;
+
+    /**
+     * defined state
+     */
     const [viewProvince, setViewProvince] = useState();
     const [viewDistrict, setViewDistrict] = useState();
     const [viewWard, setViewWard] = useState();
@@ -17,15 +30,6 @@ export default function ModalCreateComponent(props) {
     const [modalSubmit, setModalSubmit] = useState(false);
     const [disableBtn, setDisableBtn] = useState(true);
     const [hasFile, setHasFile] = useState(false);
-
-    const toggleModalNotification = () => {
-        setModalNotification(!modalNotification);
-    }
-
-    const toggleModalSubmit = () => {
-        setModalSubmit(!modalSubmit);
-    }
-
     const [identification, setIdentification] = useState({
         province: '',
         district: '',
@@ -42,6 +46,24 @@ export default function ModalCreateComponent(props) {
         note: ''
     });
 
+
+    /**
+     * event control open modal notification
+     */
+    const toggleModalNotification = () => {
+        setModalNotification(!modalNotification);
+    }
+
+    /**
+     * event control open modal submit
+     */
+    const toggleModalSubmit = () => {
+        setModalSubmit(!modalSubmit);
+    }
+
+    /**
+     * event change file
+     */
     const _onChangeFile = (e) => {
         setInfomationObject((prevState) => ({
             ...prevState,
@@ -50,6 +72,9 @@ export default function ModalCreateComponent(props) {
         setHasFile(true);
     }
 
+    /**
+     * event on change object
+     */
     const _onChange = (e) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
@@ -59,6 +84,9 @@ export default function ModalCreateComponent(props) {
         }));
     }
 
+    /**
+     * event on change select box
+     */
     const _onChangeSelectBox = (e) => {
         const fieldName = e.target.name;
         const fieldValueArray = e.target.value.split('!');
@@ -74,12 +102,18 @@ export default function ModalCreateComponent(props) {
         }));
     }
 
+    /**
+     * event get coordinates
+     */
     const getCoordinatesFromAddress = () => {
         let address = `Đường ${identification.street} ${identification.ward} ${identification.district} thành phố ${identification.province}`;
         setAddress(address);
         getCoordinatesFromApi(address);
     }
 
+    /**
+     * event get coordinates from api
+     */
     const getCoordinatesFromApi = (address) => {
         addressApi.getCoordinatesApi(address).then((response) => {
             if (response.status === Constants.HTTP_STATUS.OK) {
@@ -93,6 +127,10 @@ export default function ModalCreateComponent(props) {
         });
 
     }
+
+    /**
+     * get province
+     */
     const getProvinceApi = () => {
         addressApi.getProvinceApi().then((response) => {
             if (response.status === Constants.HTTP_STATUS.OK) {
@@ -105,6 +143,9 @@ export default function ModalCreateComponent(props) {
         });
     }
 
+    /**
+     * get district
+     */
     useEffect(() => {
         if (infomationObject.province !== 0) {
             addressApi.getDistrictApi(infomationObject.province).then((response) => {
@@ -119,6 +160,9 @@ export default function ModalCreateComponent(props) {
         }
     }, [infomationObject.province])
 
+    /**
+     * get ward, street
+     */
     useEffect(() => {
         if (infomationObject.district !== 0) {
             addressApi.getWardApi(infomationObject.district).then((response) => {
@@ -142,9 +186,16 @@ export default function ModalCreateComponent(props) {
         }
     }, [infomationObject.district]);
 
+    /**
+     * get province
+     */
     useEffect(() => {
         getProvinceApi();
     }, []);
+
+    /**
+     * render template
+     */
     return (
         <>
         <div className="modal-layout">

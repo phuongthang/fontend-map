@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
+
+//Constants
 import Constants from '../../constants/constants';
+
+//Api
 import addressApi from '../api/addressApi';
-import ModalNotification from './ModalNotification';
-import ModalSubmit from './ModalSubmit';
+
+//Component
 import ModalGetDistanceComponent from './ModalGetDistance';
 
 export default function ModalCaculatorRoadComponent(props) {
+    /**
+     * get property
+     */
     const { toggle } = props;
+
+    /**
+     * defined state
+     */
     const [viewProvincePointA, setViewProvincePointA] = useState();
     const [viewDistrictPointA, setViewDistrictPointA] = useState();
     const [viewWardPointA, setViewWardPointA] = useState();
@@ -16,11 +27,6 @@ export default function ModalCaculatorRoadComponent(props) {
     const [viewWardPointB, setViewWardPointB] = useState();
     const [viewStreetPointB, setViewStreetPointB] = useState();
     const [modalGetDistance, setModalGetDistance] = useState(false);
-
-    const toggleModalGetDistance = () => {
-        setModalGetDistance(!modalGetDistance);
-    }
-
     const [pointA, setpointA] = useState({
         province: 0,
         district: 0,
@@ -41,7 +47,16 @@ export default function ModalCaculatorRoadComponent(props) {
         latitude: ''
     })
 
+    /**
+     * event control open get distance
+     */
+    const toggleModalGetDistance = () => {
+        setModalGetDistance(!modalGetDistance);
+    }
 
+    /**
+     * event change select box point A
+     */
     const _onChangeSelectBoxPointA = (e) => {
         const fieldName = e.target.name;
         const fieldValueArray = e.target.value.split('!');
@@ -56,6 +71,9 @@ export default function ModalCaculatorRoadComponent(props) {
         }));
     }
 
+    /**
+     * event change select box point B
+     */
     const _onChangeSelectBoxPointB = (e) => {
         const fieldName = e.target.name;
         const fieldValueArray = e.target.value.split('!');
@@ -70,11 +88,17 @@ export default function ModalCaculatorRoadComponent(props) {
         }));
     }
 
+    /**
+     * get address
+     */
     const getCoordinatesFromAddress = (point) => {
         let address = `Đường ${point?.street?.value} ${point?.ward?.value} ${point?.district?.value} thành phố ${point?.province?.value}`;
         return address;
     }
 
+    /**
+     * call API get coordinates
+     */
     const getCoordinatesFromApi = (address, setValue) => {
         addressApi.getCoordinatesApi(address).then((response) => {
             if (response.status === Constants.HTTP_STATUS.OK) {
@@ -91,6 +115,9 @@ export default function ModalCaculatorRoadComponent(props) {
 
     }
 
+    /**
+     * get infor point
+     */
     const getInforPoint = async () => {
         let addressPointA = getCoordinatesFromAddress(pointA);
         let addressPointB = getCoordinatesFromAddress(pointB);
@@ -100,6 +127,10 @@ export default function ModalCaculatorRoadComponent(props) {
         toggleModalGetDistance();
 
     }
+
+    /**
+     * get province
+     */
     const getProvinceApi = () => {
         addressApi.getProvinceApi().then((response) => {
             if (response.status === Constants.HTTP_STATUS.OK) {
@@ -115,6 +146,9 @@ export default function ModalCaculatorRoadComponent(props) {
         });
     }
 
+    /**
+     * get district point A
+     */
     useEffect(() => {
         if (pointA.province !== 0) {
             addressApi.getDistrictApi(pointA.province?.id).then((response) => {
@@ -128,6 +162,10 @@ export default function ModalCaculatorRoadComponent(props) {
             })
         }
     }, [pointA.province]);
+
+    /**
+     * get district point B
+     */
     useEffect(() => {
         if (pointB.province !== 0) {
             addressApi.getDistrictApi(pointB.province?.id).then((response) => {
@@ -142,6 +180,9 @@ export default function ModalCaculatorRoadComponent(props) {
         }
     }, [pointB.province]);
 
+    /**
+     * get ward, street point A
+     */
     useEffect(() => {
         if (pointA.district !== 0) {
             addressApi.getWardApi(pointA.district?.id).then((response) => {
@@ -165,6 +206,9 @@ export default function ModalCaculatorRoadComponent(props) {
         }
     }, [pointA.district]);
 
+    /**
+     * get ward, street point B
+     */
     useEffect(() => {
         if (pointB.district !== 0) {
             addressApi.getWardApi(pointB.district?.id).then((response) => {
@@ -188,9 +232,16 @@ export default function ModalCaculatorRoadComponent(props) {
         }
     }, [pointB.district]);
 
+    /**
+     * get province
+     */
     useEffect(() => {
         getProvinceApi();
     }, []);
+
+    /**
+     * render template
+     */
     return (
         <>
             <div className="modal-caculator">

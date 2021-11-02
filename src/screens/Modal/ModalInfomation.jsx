@@ -1,9 +1,20 @@
 import React from "react";
+
+//Packet
 import { Button, Modal } from "reactstrap";
+
+//Constant
 import Common from './../../constants/common';
 
 function ModalInfomation(props){
+    /**
+     * get property
+     */
     const {modal, toggle, data } = props;
+
+    /**
+     * render template
+     */
     return(
         <>
             <Modal 

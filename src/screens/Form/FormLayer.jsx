@@ -1,4 +1,5 @@
 import React from 'react';
+//icon
 import hospital from "../assets/img/hospital.png"
 import vaccine from "../assets/img/vaccine.png"
 import covid from "../assets/img/covid.png"
@@ -8,14 +9,24 @@ import supermarket from "../assets/img/supermarket.png"
 
 export default function FormLayerComponent(props) {
 
+    /**
+     * get property
+     */
     const { showMarker, setShowMarker } = props;
 
+    /**
+     * event control change state
+     */
     const _onClickChangeState = (name, value) => {
         setShowMarker((prevState) => ({
             ...prevState,
             [name]: !value,
         }));
     }
+
+    /**
+     * render template
+     */
     return (
         <>
             <ul>
