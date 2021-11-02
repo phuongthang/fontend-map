@@ -222,12 +222,12 @@ export default function ModalCreateComponent(props) {
                             <label className="form-check-label" htmlFor="hospital">Điểm xét nghiệm</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="supermarket" value="5" onChange={_onChange} />
-                            <label className="form-check-label" htmlFor="supermarket">Siêu thị</label>
+                            <input className="form-check-input" type="radio" name="type" id="market" value="5" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="market">Chợ</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input className="form-check-input" type="radio" name="type" id="market" value="6" onChange={_onChange} />
-                            <label className="form-check-label" htmlFor="market">Chợ</label>
+                            <input className="form-check-input" type="radio" name="type" id="supermarket" value="6" onChange={_onChange} />
+                            <label className="form-check-label" htmlFor="supermarket">Siêu thị</label>
                         </div>
                     </div>
                     <div className="row">
