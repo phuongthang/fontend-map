@@ -131,8 +131,38 @@ ul {
       }
       .row{
         padding: 10px 0;
+        text-align: left;
       }
   }
+}
+
+.modal-update{
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  max-width: 1000px !important;
+.modal-content{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    height: 560px;
+    padding: 20px;
+    .group-button{
+      width: 300px;
+      margin: 15px auto;
+      display: flex;
+      justify-content: space-between;
+      button{
+        width: 120px;
+      }
+    }
+    .row{
+      padding: 10px 0;
+      text-align: left;
+    }
+}
 }
 
 .modal-caculator{
@@ -309,6 +339,7 @@ ul {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  z-index: 999999999999999;
   .modal-content{
       margin: auto;
       display: flex;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 //Packet
 import { Button, Modal } from "reactstrap";
@@ -6,11 +6,26 @@ import { Button, Modal } from "reactstrap";
 //Constant
 import Common from './../../constants/common';
 
+//Component
+import ModalUpdatePointInMapComponent from "./ModalUpdate";
+
 function ModalInfomation(props){
     /**
      * get property
      */
     const {modal, toggle, data } = props;
+
+    /**
+     * defined state
+     */
+    const [modalUpdatePoint, setModalUpdatePoint] = useState(false);
+
+    /**
+     * displayModal
+     */
+     const toggleModalUpdate = () => {
+        setModalUpdatePoint(!modalUpdatePoint);
+    }
 
     /**
      * render template
@@ -32,9 +47,14 @@ function ModalInfomation(props){
                 </div>
 
                 <div className="text-center box-modal-action">
+                    <Button onClick={toggleModalUpdate} className="btn btn-sm btn-success">Chỉnh sửa</Button>
                     <Button onClick={toggle} className="btn btn-sm btn-danger">Đóng</Button>
                 </div>
             </Modal>
+
+            {
+                modalUpdatePoint && <ModalUpdatePointInMapComponent modal = {modal} toggle = {toggle} data = {data}/>
+            }
         </>
     );
 }

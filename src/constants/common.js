@@ -25,6 +25,15 @@ const common = {
         5: 'markets',
         6: 'supermarkets'
     },
+
+    MAPPING_TYPE_CODE: {
+        1 : 'Ổ Dịch',
+        2: 'Khu phong tỏa',
+        3: 'Điểm tiêm chủng',
+        4: 'Điểm xét nghiệm',
+        5: 'Chợ',
+        6: 'Siêu thị'
+    },
     URL_IMG: 'http://127.0.0.1:8000'
 }
 

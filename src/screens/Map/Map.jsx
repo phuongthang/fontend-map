@@ -18,9 +18,11 @@ import Constants from '../../constants/constants';
 
 //Api
 import coordinatesApi from '../api/coordinatesApi';
+import addressApi from '../api/addressApi';
 
 //Component
 import ModalInfomation from './../Modal/ModalInfomation';
+import ModalCreatePointInMapComponent from '../Modal/ModalCreatePointInMap';
 
 export default function MapScreen() {
     /**
@@ -34,7 +36,11 @@ export default function MapScreen() {
     const [market, setMarket] = useState();
     const [supermarket, setSuperMarket] = useState();
     const [modalInfomation, setModalInfomation] = useState(false);
+    const [modalCreatePoint, setModalCreatePoint] = useState(false);
     const [modalData, setModalData] = useState();
+    const [longitude, setLongitude] = useState();
+    const [latitude, setLatitude] = useState();
+    const [address, setAddress] = useState();
     const [showMarker, setShowMarker] = useState({
         covid: true,
         lockdown: true,
@@ -59,6 +65,10 @@ export default function MapScreen() {
         setModalInfomation(!modalInfomation);
     }
 
+    const toggleModalCreatePoint = () => {
+        setModalCreatePoint(!modalCreatePoint);
+    }
+
     /**
      * open modal detail coordinates
      */
@@ -66,6 +76,35 @@ export default function MapScreen() {
         setModalData(data);
         toggleModalInfomation();
     }
+
+    /**
+     * get coordinates by onClick
+     */
+    const _onClick = async(e) => {
+        await getAddressFromCoordinates(e.lngLat[0], e.lngLat[1]);
+        toggleModalCreatePoint();
+    }
+
+    /**
+     * call API get adrress by coordinates
+     */
+    const getAddressFromCoordinates = (longitude, latitude) => {
+        addressApi.getAddressFromCoordinatesApi(longitude, latitude).then((response) => {
+            let mounted = true;
+            if (mounted) {
+                if (response.status === Constants.HTTP_STATUS.OK) {
+                    setAddress(response.data.features[0].place_name);
+                    setLongitude(longitude);
+                    setLatitude(latitude);
+                }
+            }
+            return () => mounted = false;
+        }, (error) => {
+            let mounted = true;
+            return () => mounted = false;
+        });
+    }
+
 
     /**
      * init data
@@ -105,6 +144,7 @@ export default function MapScreen() {
                 mapStyle={mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
                 mapboxApiAccessToken={mapboxApiAccessToken}
+                onClick={(e)=>_onClick(e)}
             >
                 {
                     showMarker.all &&
@@ -203,6 +243,7 @@ export default function MapScreen() {
                 }
             </ReactMapGL>
             {modalInfomation && <ModalInfomation modal={modalInfomation} toggle={toggleModalInfomation} data={modalData} />}
+            {modalCreatePoint && <ModalCreatePointInMapComponent modal={modalCreatePoint} toggle={toggleModalCreatePoint} longitude = {longitude} latitude={latitude} address = {address}/>}
         </>
     );
 }
