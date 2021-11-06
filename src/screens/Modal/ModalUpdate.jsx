@@ -27,6 +27,31 @@ export default function ModalUpdatePointInMapComponent(props) {
     });
 
     /**
+     * register coordinates
+     */
+     const updateCoordinates = () => {
+        const form = new FormData();
+        form.append("id", data.id);
+        form.append("type", parseInt(data.type,10));
+        form.append("note", infomationObject.note);
+        if (hasFile === true) {
+            form.append("img", infomationObject.img);
+        }
+        coordinatesApi.updateCoordinates(form).then((response) => {
+            let mounted = true;
+            if (mounted) {
+                if (response.status === Constants.HTTP_STATUS.OK) {
+                    window.location.reload();
+                }
+            }
+            return () => mounted = false;
+        }, (error) => {
+            let mounted = true;
+            return () => mounted = false;
+        });
+    }
+
+    /**
      * event change file
      */
     const _onChangeFile = (e) => {
@@ -117,7 +142,7 @@ export default function ModalUpdatePointInMapComponent(props) {
                         </div>
                     </div>
                     <div className="group-button d-flex text-center">
-                        <button className="btn btn-sm btn-primary" type="button">Chỉnh sửa</button>
+                        <button onClick={updateCoordinates} className="btn btn-sm btn-primary" type="button">Chỉnh sửa</button>
                         <button className="btn btn-sm btn-danger" type="button" onClick={toggle}>Hủy</button>
                     </div>
                 </form>

@@ -19,6 +19,11 @@ const coordinatesApi = {
         const url = `/coordinates/change`;
         return axiosClient.post(url, params);
     },
+
+    updateCoordinates(params) {
+        const url = `/coordinates/update`;
+        return axiosClient.post(url, params);
+    },
 };
 
 export default coordinatesApi;

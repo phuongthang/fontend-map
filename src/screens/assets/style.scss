@@ -136,6 +136,13 @@ ul {
   }
 }
 
+.modal::-webkit-scrollbar {
+  width: 0 !important 
+}
+.modal{
+  overflow: -moz-scrollbars-none;
+}
+
 .modal-update{
   height: 100%;
   margin: 0 auto;
