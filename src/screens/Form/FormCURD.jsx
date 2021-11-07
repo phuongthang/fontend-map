@@ -5,6 +5,7 @@ import view from "../assets/img/view.png";
 import unview from "../assets/img/unview.png";
 import list from "../assets/img/list.png";
 import road from "../assets/img/road.png";
+import road2point from "../assets/img/road2point.png";
 
 //Component
 import ModalCreateComponent from "../Modal/ModalCreate";
@@ -15,7 +16,7 @@ export default function FormCURDComponent(props) {
     /**
      * get property
      */
-    const { showMarker, setShowMarker } = props;
+    const { showMarker, setShowMarker, twoPoint, setTwoPoint } = props;
 
     /**
      * get defined state
@@ -89,6 +90,14 @@ export default function FormCURDComponent(props) {
                     <label onClick={toggleModalCaculator}>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={road} alt="" />
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label onClick={()=>setTwoPoint(!twoPoint)}>
+                    <span className={`${twoPoint ? '' : 'active'}`}></span>
+                        <div className="icon-box image-container">
+                            <img crossOrigin="anonymous" className="image-content" src={road2point} alt="" />
                         </div>
                     </label>
                 </li>

@@ -13,7 +13,7 @@ export default function OffCanvasComponent(props) {
     /**
      * get property
      */
-    const {showMarker, setShowMarker } = props;
+    const {showMarker, setShowMarker, twoPoint, setTwoPoint } = props;
 
     /**
      * defined state
@@ -47,7 +47,7 @@ export default function OffCanvasComponent(props) {
                     <Offcanvas.Title>LỚP DỮ LIỆU TRÊN BẢN ĐỒ</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    <FormCURDComponent setShowMarker = {setShowMarker} showMarker={showMarker}/>
+                    <FormCURDComponent setShowMarker = {setShowMarker} showMarker={showMarker} twoPoint = {twoPoint} setTwoPoint = {setTwoPoint}/>
                     <hr/>
                     <FormLayerComponent setShowMarker = {setShowMarker} showMarker={showMarker}/>
                 </Offcanvas.Body>

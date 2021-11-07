@@ -50,12 +50,13 @@ export default function MapScreen() {
         supermarket: true,
         all: true
 
-    })
+    });
+    const [mapStyle, setMapStyle] = useState(Common.MAP_STYLE);
+    const [twoPoint, setTwoPoint] = useState(false);
 
     /**
      * defined property
      */
-    const mapStyle = Common.MAP_STYLE;
     const mapboxApiAccessToken = Common.MAP_BOX_API_ACCESS_TOKEN;
 
     /**
@@ -138,7 +139,7 @@ export default function MapScreen() {
      */
     return (
         <>
-            <Header setShowMarker={setShowMarker} showMarker={showMarker} />
+            <Header setShowMarker={setShowMarker} showMarker={showMarker} setMapStyle = {setMapStyle} mapStyle = {mapStyle} twoPoint = {twoPoint} setTwoPoint = {setTwoPoint} />
             <ReactMapGL
                 {...viewport}
                 mapStyle={mapStyle}
