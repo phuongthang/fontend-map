@@ -7,6 +7,7 @@ import covidicon from "../assets/img/covid.png"
 import lockdownicon from "../assets/img/lockdown.png"
 import marketicon from "../assets/img/market.png"
 import supermarketicon from "../assets/img/supermarket.png"
+import location from "../assets/img/location.png"
 
 //Screen
 import ReactMapGL, { Marker } from 'react-map-gl';
@@ -23,6 +24,7 @@ import addressApi from '../api/addressApi';
 //Component
 import ModalInfomation from './../Modal/ModalInfomation';
 import ModalCreatePointInMapComponent from '../Modal/ModalCreatePointInMap';
+import ModalGetDistanceTwoPointComponent from '../Modal/ModalGetDistanceTwoPoint';
 
 export default function MapScreen() {
     /**
@@ -53,6 +55,8 @@ export default function MapScreen() {
     });
     const [mapStyle, setMapStyle] = useState(Common.MAP_STYLE);
     const [twoPoint, setTwoPoint] = useState(false);
+    const [marker, setMarker] = useState([]);
+    const [modalGetDistanceTwoPoint, setModalGetDistanceTwoPoint] = useState(false);
 
     /**
      * defined property
@@ -70,6 +74,10 @@ export default function MapScreen() {
         setModalCreatePoint(!modalCreatePoint);
     }
 
+    const toggleModalGetDistanceTwoPoint = () => {
+        setModalGetDistanceTwoPoint(!modalGetDistanceTwoPoint);
+    }
+
     /**
      * open modal detail coordinates
      */
@@ -81,9 +89,23 @@ export default function MapScreen() {
     /**
      * get coordinates by onClick
      */
-    const _onClick = async(e) => {
-        await getAddressFromCoordinates(e.lngLat[0], e.lngLat[1]);
-        toggleModalCreatePoint();
+    const _onClick = async (e) => {
+        if (twoPoint) {
+            setMarker((prevState) => [
+                ...prevState,
+                {
+                    longitude: e.lngLat[0],
+                    latitude: e.lngLat[1],
+                    key: marker.length
+                }
+            ]);
+            if(marker.length >= 1){
+                toggleModalGetDistanceTwoPoint();
+            }
+        } else {
+            await getAddressFromCoordinates(e.lngLat[0], e.lngLat[1]);
+            toggleModalCreatePoint();
+        }
     }
 
     /**
@@ -139,14 +161,30 @@ export default function MapScreen() {
      */
     return (
         <>
-            <Header setShowMarker={setShowMarker} showMarker={showMarker} setMapStyle = {setMapStyle} mapStyle = {mapStyle} twoPoint = {twoPoint} setTwoPoint = {setTwoPoint} />
+            <Header setShowMarker={setShowMarker} showMarker={showMarker} setMapStyle={setMapStyle} mapStyle={mapStyle} twoPoint={twoPoint} setTwoPoint={setTwoPoint} />
             <ReactMapGL
                 {...viewport}
                 mapStyle={mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
                 mapboxApiAccessToken={mapboxApiAccessToken}
-                onClick={(e)=>_onClick(e)}
+                onClick={(e) => _onClick(e)}
             >
+                {
+                    marker && marker.map((item) => (
+                        <Marker
+                            longitude={+item.longitude}
+                            latitude={+item.latitude}
+                            offsetLeft={-20}
+                            offsetTop={-30}
+                            key={item.key}
+                        >
+                            <img crossOrigin="anonymous"
+                                style={{ width: "30px", height: "30px", cursor: 'pointer' }}
+                                src={location} alt=""
+                            />
+                        </Marker>
+                    ))
+                }
                 {
                     showMarker.all &&
                     <>
@@ -244,7 +282,8 @@ export default function MapScreen() {
                 }
             </ReactMapGL>
             {modalInfomation && <ModalInfomation modal={modalInfomation} toggle={toggleModalInfomation} data={modalData} />}
-            {modalCreatePoint && <ModalCreatePointInMapComponent modal={modalCreatePoint} toggle={toggleModalCreatePoint} longitude = {longitude} latitude={latitude} address = {address}/>}
+            {modalCreatePoint && <ModalCreatePointInMapComponent modal={modalCreatePoint} toggle={toggleModalCreatePoint} longitude={longitude} latitude={latitude} address={address} />}
+            {modalGetDistanceTwoPoint && <ModalGetDistanceTwoPointComponent modal={modalGetDistanceTwoPoint} toggle={toggleModalGetDistanceTwoPoint} marker = {marker} setMarker = {setMarker} />}
         </>
     );
 }
