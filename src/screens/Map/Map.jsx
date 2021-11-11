@@ -58,6 +58,8 @@ export default function MapScreen() {
     const [marker, setMarker] = useState([]);
     const [modalGetDistanceTwoPoint, setModalGetDistanceTwoPoint] = useState(false);
 
+    let ikey = sessionStorage.getItem('ikey');
+
     /**
      * defined property
      */
@@ -167,7 +169,7 @@ export default function MapScreen() {
                 mapStyle={mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
                 mapboxApiAccessToken={mapboxApiAccessToken}
-                onClick={(e) => _onClick(e)}
+                onClick={ikey ? (e) => _onClick(e) : null}
             >
                 {
                     marker && marker.map((item) => (

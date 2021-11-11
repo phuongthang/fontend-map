@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 //icon
 import create from "../assets/img/create.png";
 import view from "../assets/img/view.png";
@@ -24,6 +24,7 @@ export default function FormCURDComponent(props) {
     const [modalCreate, setModalCreate] = useState(false);
     const [modalList, setModalList] = useState(false);
     const [modalCaculator, setModalCaculator] = useState(false);
+    let ikey = sessionStorage.getItem('ikey');
 
     /**
      * event control open modal create
@@ -65,20 +66,25 @@ export default function FormCURDComponent(props) {
                 <div className="box-title">
                     <h5>Cập nhật thông tin</h5>
                 </div>
-                <li>
-                    <label onClick={toggleModalList}>
-                        <div className="icon-box image-container">
-                            <img crossOrigin="anonymous" className="image-content" src={list} alt="" />
-                        </div>
-                    </label>
-                </li>
-                <li>
-                    <label onClick={toggleModalCreate}>
-                        <div className="icon-box image-container">
-                            <img crossOrigin="anonymous" className="image-content" src={create} alt="" />
-                        </div>
-                    </label>
-                </li>
+                {
+                    ikey && <li>
+                        <label onClick={toggleModalList}>
+                            <div className="icon-box image-container">
+                                <img crossOrigin="anonymous" className="image-content" src={list} alt="" />
+                            </div>
+                        </label>
+                    </li>
+                }
+                {
+                    ikey &&
+                    <li>
+                        <label onClick={toggleModalCreate}>
+                            <div className="icon-box image-container">
+                                <img crossOrigin="anonymous" className="image-content" src={create} alt="" />
+                            </div>
+                        </label>
+                    </li>
+                }
                 <li>
                     <label onClick={() => _onClickChangeState("all", showMarker.all)}>
                         <div className="icon-box image-container">
@@ -94,8 +100,8 @@ export default function FormCURDComponent(props) {
                     </label>
                 </li>
                 <li>
-                    <label onClick={()=>setTwoPoint(!twoPoint)}>
-                    <span className={`${twoPoint ? '' : 'active'}`}></span>
+                    <label onClick={() => setTwoPoint(!twoPoint)}>
+                        <span className={`${twoPoint ? '' : 'active'}`}></span>
                         <div className="icon-box image-container">
                             <img crossOrigin="anonymous" className="image-content" src={road2point} alt="" />
                         </div>
@@ -103,13 +109,13 @@ export default function FormCURDComponent(props) {
                 </li>
             </ul>
             {
-                modalCreate && <ModalCreateComponent modal={modalCreate} toggle = {toggleModalCreate}/>
+                modalCreate && <ModalCreateComponent modal={modalCreate} toggle={toggleModalCreate} />
             }
             {
-                modalList && <ModalListComponent modal={modalList} toggle = {toggleModalList}/>
+                modalList && <ModalListComponent modal={modalList} toggle={toggleModalList} />
             }
             {
-                modalCaculator && <ModalCaculatorRoadComponent modal = {modalCaculator} toggle = {toggleModalCaculator}/>
+                modalCaculator && <ModalCaculatorRoadComponent modal={modalCaculator} toggle={toggleModalCaculator} />
             }
         </>
     )

@@ -12,6 +12,7 @@ export default function ModalUpdatePointInMapComponent(props) {
      * get property
      */
     const { toggle, data } = props;
+    let ikey = sessionStorage.getItem('ikey');
 
     /**
      * defined state
@@ -142,7 +143,10 @@ export default function ModalUpdatePointInMapComponent(props) {
                         </div>
                     </div>
                     <div className="group-button d-flex text-center">
+                        {
+                            ikey && 
                         <button onClick={updateCoordinates} className="btn btn-sm btn-primary" type="button">Chỉnh sửa</button>
+                        }
                         <button className="btn btn-sm btn-danger" type="button" onClick={toggle}>Hủy</button>
                     </div>
                 </form>
