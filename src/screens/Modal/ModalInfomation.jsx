@@ -15,6 +15,8 @@ function ModalInfomation(props){
      */
     const {modal, toggle, data } = props;
 
+    let ikey = sessionStorage.getItem('ikey');
+
     /**
      * defined state
      */
@@ -26,6 +28,8 @@ function ModalInfomation(props){
      const toggleModalUpdate = () => {
         setModalUpdatePoint(!modalUpdatePoint);
     }
+
+    console.log(data);
 
     /**
      * render template
@@ -47,7 +51,10 @@ function ModalInfomation(props){
                 </div>
 
                 <div className="text-center box-modal-action">
+                    {
+                        ikey && 
                     <Button onClick={toggleModalUpdate} className="btn btn-sm btn-success">Chỉnh sửa</Button>
+                    }
                     <Button onClick={toggle} className="btn btn-sm btn-danger">Đóng</Button>
                 </div>
             </Modal>

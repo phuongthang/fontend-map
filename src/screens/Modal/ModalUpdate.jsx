@@ -12,7 +12,6 @@ export default function ModalUpdatePointInMapComponent(props) {
      * get property
      */
     const { toggle, data } = props;
-    let ikey = sessionStorage.getItem('ikey');
 
     /**
      * defined state
@@ -83,7 +82,8 @@ export default function ModalUpdatePointInMapComponent(props) {
                 address: data.address,
                 note: data.note,
                 longitude: data.longitude,
-                latitude: data.latitude
+                latitude: data.latitude,
+                name: data.name
             }));
         }
     },[data]);
@@ -101,7 +101,7 @@ export default function ModalUpdatePointInMapComponent(props) {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <p>Đối tượng: {Common.MAPPING_TYPE_CODE[infomationObject.type]}</p>
+                            <p>Đối tượng: {infomationObject.name} </p>
                         </div>
                     </div>
                     <div className="row">
@@ -143,10 +143,7 @@ export default function ModalUpdatePointInMapComponent(props) {
                         </div>
                     </div>
                     <div className="group-button d-flex text-center">
-                        {
-                            ikey && 
                         <button onClick={updateCoordinates} className="btn btn-sm btn-primary" type="button">Chỉnh sửa</button>
-                        }
                         <button className="btn btn-sm btn-danger" type="button" onClick={toggle}>Hủy</button>
                     </div>
                 </form>

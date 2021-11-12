@@ -27,7 +27,7 @@ const common = {
     },
 
     MAPPING_TYPE_CODE: {
-        1 : 'Ổ Dịch',
+        1: 'Ổ Dịch',
         2: 'Khu phong tỏa',
         3: 'Điểm tiêm chủng',
         4: 'Điểm xét nghiệm',

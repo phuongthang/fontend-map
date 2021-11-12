@@ -105,8 +105,10 @@ export default function MapScreen() {
                 toggleModalGetDistanceTwoPoint();
             }
         } else {
-            await getAddressFromCoordinates(e.lngLat[0], e.lngLat[1]);
-            toggleModalCreatePoint();
+            if(ikey){
+                await getAddressFromCoordinates(e.lngLat[0], e.lngLat[1]);
+                toggleModalCreatePoint();
+            }
         }
     }
 
@@ -169,7 +171,7 @@ export default function MapScreen() {
                 mapStyle={mapStyle}
                 onViewportChange={(viewport) => setViewport(viewport)}
                 mapboxApiAccessToken={mapboxApiAccessToken}
-                onClick={ikey ? (e) => _onClick(e) : null}
+                onClick={(e) => _onClick(e)}
             >
                 {
                     marker && marker.map((item) => (

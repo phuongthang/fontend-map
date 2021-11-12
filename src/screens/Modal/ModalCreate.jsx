@@ -285,7 +285,7 @@ export default function ModalCreateComponent(props) {
                         <div className="col-lg-12">
                             <div className="form-group">
                                 <label htmlFor="note">Ghi chú:</label>
-                                <input type="textarea" name="note" row="4" className="form-control" onChange={_onChange} />
+                                <input type="textarea" autoComplete="off" name="note" row="4" className="form-control" onChange={_onChange} />
                             </div>
                         </div>
                     </div>
